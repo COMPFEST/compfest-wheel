@@ -1,3 +1,3 @@
-import { Wheel } from "./wheel";
+import { Wheel } from './wheel'
 
-export { Wheel };
+export { Wheel }

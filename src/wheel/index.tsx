@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { wheelProps } from './interface';
+import React, { useState } from 'react'
+import { wheelProps } from './interface'
 
-import './index.css';
+import './index.css'
 
 export const Wheel: React.FC<
   React.ComponentPropsWithoutRef<'div'> & wheelProps
@@ -13,66 +13,66 @@ export const Wheel: React.FC<
   handleSpin,
   ...props
 }) => {
-  const [prizeRotate, setPrizeRotate] = useState(Math.random() * 500);
-  const [onSpin, setOnSpin] = useState(false);
+  const [prizeRotate, setPrizeRotate] = useState(Math.random() * 500)
+  const [onSpin, setOnSpin] = useState(false)
 
-  const totalDegree = 360;
-  const panjang = rewards.length;
-  const perputaran = totalDegree / panjang;
-  const strokeDash = wheelWidth * 3.02;
+  const totalDegree = 360
+  const panjang = rewards.length
+  const perputaran = totalDegree / panjang
+  const strokeDash = wheelWidth * 3.02
   const stiling = {
     strokeDasharray: strokeDash,
-  };
+  }
 
   function spinTheWheel(prize: string) {
-    let prizeId = null;
+    let prizeId = null
     for (let i = 0; i < rewards.length; i++) {
       if (rewards[i].id === prize) {
-        prizeId = i;
+        prizeId = i
       }
     }
 
-    if (prizeId === null) throw new Error('Prize not found');
+    if (prizeId === null) throw new Error('Prize not found')
 
-    const random = Math.random();
-    setOnSpin(true);
+    const random = Math.random()
+    setOnSpin(true)
     setPrizeRotate(
       -(270 + (prizeId as number) * perputaran + perputaran * random) -
         360 * Math.ceil(random * 700)
-    );
+    )
     setTimeout(() => {
-      setOnSpin(false);
-    }, duration + 10);
+      setOnSpin(false)
+    }, duration + 10)
   }
 
   async function getPrize(): Promise<string> {
     const promise: Promise<string> = new Promise((resolve, reject) => {
-      resolve(handleSpin() as Promise<string>);
-    });
+      resolve(handleSpin() as Promise<string>)
+    })
 
-    return promise;
+    return promise
   }
 
   async function clickSpin() {
     try {
-      const result: string = await getPrize();
-      spinTheWheel(result);
+      const result: string = await getPrize()
+      spinTheWheel(result)
     } catch (error) {
-      console.error('COMPFEST WHEEL ERROR');
+      console.error('COMPFEST WHEEL ERROR')
     }
   }
 
   return (
     <div {...props}>
       <div
-        className='container'
+        className="container"
         style={{
           width: wheelWidth,
           height: wheelWidth,
         }}
       >
         <div
-          className='arrow'
+          className="arrow"
           onClick={onSpin ? () => {} : clickSpin}
           style={{
             fontSize: `${(wheelWidth * 4) / 100}px`,
@@ -81,38 +81,38 @@ export const Wheel: React.FC<
         >
           SPIN
         </div>
-        <div className='triangle-container'>
+        <div className="triangle-container">
           <svg
             width={(wheelWidth * 20) / 100}
             height={(wheelWidth * 20) / 100}
-            viewBox='-50 -50 300 300'
+            viewBox="-50 -50 300 300"
           >
             <defs>
-              <linearGradient id='gradient' x1='0%' y1='0%' x2='100%' y2='0%'>
-                <stop offset='0%' stopColor='#1c1c28' />
-                <stop offset='100%' stopColor='#363649' />
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#1c1c28" />
+                <stop offset="100%" stopColor="#363649" />
               </linearGradient>
             </defs>
-            <filter id='shadow' colorInterpolationFilters='sRGB'>
+            <filter id="shadow" colorInterpolationFilters="sRGB">
               <feDropShadow
-                dx='0'
-                dy='-4'
-                stdDeviation='28'
-                floodColor='#C4A9FE40'
+                dx="0"
+                dy="-4"
+                stdDeviation="28"
+                floodColor="#C4A9FE40"
               />
             </filter>
             <polygon
-              className='triangle'
-              strokeLinejoin='round'
-              points='100,0 0,200 200,200'
-              fill='url(#gradient)'
-              stroke='url(#gradient)'
-              filter='url(#shadow)'
+              className="triangle"
+              strokeLinejoin="round"
+              points="100,0 0,200 200,200"
+              fill="url(#gradient)"
+              stroke="url(#gradient)"
+              filter="url(#shadow)"
             />
           </svg>
         </div>
         <div
-          className='wheel'
+          className="wheel"
           style={{
             transform: `rotate(${prizeRotate}deg)`,
             transitionDuration: `${duration}ms`,
@@ -121,13 +121,13 @@ export const Wheel: React.FC<
           {rewards.map((e, id) => (
             <div
               key={e.id}
-              className='reward-container'
+              className="reward-container"
               style={{
                 transform: `rotate(${perputaran * id}deg)`,
               }}
             >
               <span
-                className='reward-box'
+                className="reward-box"
                 style={{
                   transform: `translate(0, -50%) rotate(${
                     180 + perputaran / 2
@@ -136,7 +136,7 @@ export const Wheel: React.FC<
                 }}
               >
                 <span
-                  className='point-icon'
+                  className="point-icon"
                   style={{
                     color: `${colors[id % colors.length]}`,
                     fontSize: `${(wheelWidth * 3) / 100}px`,
@@ -149,18 +149,18 @@ export const Wheel: React.FC<
                 </span>
                 {e.name}
               </span>
-              <svg className='circle-container'>
+              <svg className="circle-container">
                 <circle
-                  className='circle'
+                  className="circle"
                   style={{
                     ...stiling,
                     strokeDashoffset:
                       strokeDash - (strokeDash * perputaran) / 360,
                     stroke: `${colors[id % colors.length]}`,
                   }}
-                  cx='50%'
-                  cy='50%'
-                  r='48%'
+                  cx="50%"
+                  cy="50%"
+                  r="48%"
                 ></circle>
               </svg>
             </div>
@@ -168,5 +168,5 @@ export const Wheel: React.FC<
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

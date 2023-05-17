@@ -41,7 +41,7 @@
     "rollup-plugin-typescript2": "^0.34.1",
     "typescript": "^4.9.4"
   },
- "scripts": {
+  "scripts": {
     "local": "yarn build && yarn unlink &&  yarn link",
     "build": "rollup -c --bundleConfigAsCjs",
     "prepare": "husky install",
