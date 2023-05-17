@@ -1,6 +1,6 @@
 {
   "name": "compfest-wheel",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Wheel of fortune presented by Compfest",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
