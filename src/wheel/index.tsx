@@ -149,7 +149,7 @@ export const Wheel: React.FC<
                     P
                   </span>
                 )}
-                {e.amount}
+                {e.amount === 0 ? 'ZONK' : e.amount}
               </span>
               <svg className="circle-container">
                 <circle
