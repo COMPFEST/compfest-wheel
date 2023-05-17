@@ -1,6 +1,5 @@
 type rewardProps = {
   id: string
-  name: string
   amount: number
 }
 

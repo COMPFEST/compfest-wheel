@@ -135,19 +135,21 @@ export const Wheel: React.FC<
                   fontSize: `${(wheelWidth * 7) / 100}px`,
                 }}
               >
-                <span
-                  className="point-icon"
-                  style={{
-                    color: `${colors[id % colors.length]}`,
-                    fontSize: `${(wheelWidth * 3) / 100}px`,
-                    width: `${(wheelWidth * 5) / 100}px`,
-                    height: `${(wheelWidth * 5) / 100}px`,
-                    marginRight: `${(wheelWidth * 1.5) / 100}px`,
-                  }}
-                >
-                  P
-                </span>
-                {e.name}
+                {e.amount === 0 && (
+                  <span
+                    className="point-icon"
+                    style={{
+                      color: `${colors[id % colors.length]}`,
+                      fontSize: `${(wheelWidth * 3) / 100}px`,
+                      width: `${(wheelWidth * 5) / 100}px`,
+                      height: `${(wheelWidth * 5) / 100}px`,
+                      marginRight: `${(wheelWidth * 1.5) / 100}px`,
+                    }}
+                  >
+                    P
+                  </span>
+                )}
+                {e.amount}
               </span>
               <svg className="circle-container">
                 <circle
