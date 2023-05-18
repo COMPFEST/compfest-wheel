@@ -118,12 +118,12 @@ export const Wheel: React.FC<
             transitionDuration: `${duration}ms`,
           }}
         >
-          {rewards.map((e, id) => (
+          {rewards.map(({ amount, id }, index) => (
             <div
-              key={e.id}
+              key={id}
               className="reward-container"
               style={{
-                transform: `rotate(${perputaran * id}deg)`,
+                transform: `rotate(${perputaran * index}deg)`,
               }}
             >
               <span
@@ -135,11 +135,11 @@ export const Wheel: React.FC<
                   fontSize: `${(wheelWidth * 7) / 100}px`,
                 }}
               >
-                {e.amount === 0 && (
+                {amount > 0 && (
                   <span
                     className="point-icon"
                     style={{
-                      color: `${colors[id % colors.length]}`,
+                      color: `${colors[index % colors.length]}`,
                       fontSize: `${(wheelWidth * 3) / 100}px`,
                       width: `${(wheelWidth * 5) / 100}px`,
                       height: `${(wheelWidth * 5) / 100}px`,
@@ -149,7 +149,7 @@ export const Wheel: React.FC<
                     P
                   </span>
                 )}
-                {e.amount === 0 ? 'ZONK' : e.amount}
+                {amount === 0 ? 'ZONK' : amount}
               </span>
               <svg className="circle-container">
                 <circle
@@ -158,7 +158,7 @@ export const Wheel: React.FC<
                     ...stiling,
                     strokeDashoffset:
                       strokeDash - (strokeDash * perputaran) / 360,
-                    stroke: `${colors[id % colors.length]}`,
+                    stroke: `${colors[index % colors.length]}`,
                   }}
                   cx="50%"
                   cy="50%"
