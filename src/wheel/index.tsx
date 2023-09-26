@@ -65,7 +65,7 @@ export const Wheel: React.FC<
   return (
     <div {...props}>
       <div
-        className="container"
+        className="wheel-container"
         style={{
           width: wheelWidth,
           height: wheelWidth,
